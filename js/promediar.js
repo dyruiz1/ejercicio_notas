@@ -1,11 +1,10 @@
 // Copyright 2021 JUSTINO RAMOS STUDENT
-console.log("lo que sea");
 /**
  * (TRABAJO PRACTICO)
  *
  * @author juscoder
  */
-function agregarNotas() {
+async function agregarNotas() {
   let nom = document.getElementById("nombre").value;
   let not1 = document.getElementById("nota1").value;
   let not2 = document.getElementById("nota2").value;
@@ -34,7 +33,9 @@ function agregarNotas() {
     alert("la nota no puede ser mas de 5");
     return false;
   }
-  debugger;
+
+  await llamadoAPI();
+
   //Promediar la suma de las notas entre 3
   let prom = (parseFloat(not1) + parseFloat(not2) + parseFloat(not3)) / 3;
 
@@ -98,4 +99,23 @@ function agregarNotas() {
   document.getElementById("nota1").value = "";
   document.getElementById("nota2").value = "";
   document.getElementById("nota3").value = "";
+}
+
+function llamadoAPI() {
+  toggleSpinner(true);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      toggleSpinner(false);
+      resolve();
+    }, 3000);
+  });
+}
+
+function toggleSpinner(show) {
+  document.getElementById("lds-background").style.display = show
+    ? "block"
+    : "none";
+  document.getElementById("lds-facebook").style.display = show
+    ? "block"
+    : "none";
 }
